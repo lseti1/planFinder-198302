@@ -4,20 +4,12 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Title">Title Card</div>
+    <div className="IconsSignIn">Icons & Sign In</div>
+    <div className="SearchBar">Search Bar</div>
+    <div className="sortButton">Sort Button</div>
+    <div className="filterButtons">Filters Section</div>
+    <div className="searchResults">Search Results - This section will need to update to allow scrolling to the bottom tho</div>
     </div>
   );
 }

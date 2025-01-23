@@ -2,37 +2,87 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: linear-gradient(to top, rgb(255, 255, 255) 75%, rgb(119, 155, 223) 25%);
+
+  width: 100vw;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.Title {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
   color: white;
+
+  width: 20%;
+  height: 80px;
+  
+  position: absolute;
+  left: 25%;
+  top: 5%;
 }
 
-.App-link {
-  color: #61dafb;
+.IconsSignIn {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+
+  width: 20%;
+  height: 80px;
+  
+  position: absolute;
+  right: 25%;
+  top: 5%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.SearchBar {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+
+  width: 30%;
+  height: 80px;
+  
+  position: absolute;
+  left: 25%;
+  top: 15%;
+}
+
+.sortButton {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+
+  width: 15%;
+  height: 2%;
+  
+  position: absolute;
+  right: 25%;
+  top: 27%;
+}
+
+.filterButtons {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+
+  width: 12%;
+  height: 300px;
+  
+  position: absolute;
+  left: 25%;
+  top: 30%;
+}
+
+.searchResults {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: white;
+
+  width: 37%;
+  height: 50%;
+  
+  position: absolute;
+  right: 25%;
+  top: 30%;
 }
