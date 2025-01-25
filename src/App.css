@@ -10,42 +10,82 @@ body {
 }
 
 .Title {
-  background-color: rgba(0, 0, 0, 0.2);
-  text-align: center;
+  display: grid;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: left;
   color: white;
 
   width: 20%;
-  height: 80px;
+  height: 8%;
   
   position: absolute;
   left: 25%;
-  top: 5%;
+  top: 0%;
 }
 
 .IconsSignIn {
-  background-color: rgba(0, 0, 0, 0.2);
-  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  background-color: rgba(0, 0, 0, 0);
   color: white;
+  gap: 10px;
 
   width: 20%;
-  height: 80px;
+  height: 8%;
   
   position: absolute;
   right: 25%;
-  top: 5%;
+  top: 0%;
 }
+
+.buttons {
+  height: 30px;
+  width: 70px;
+}
+
+.InfoCard1 {
+  color: white;
+  display: grid;
+  text-align: left;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  height: 5%;
+  width: 50%;
+
+  position: absolute;
+  left: 25%;
+  top: 7%;
+}
+
+.InfoCard2 {
+  color: white;
+  display: grid;
+  text-align: left;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  height: 3%;
+  width: 50%;
+  font-weight: bold;
+
+  position: absolute;
+  left: 25%;
+  top: 12%;
+}
+
 
 .SearchBar {
   background-color: rgba(0, 0, 0, 0.2);
   text-align: center;
   color: white;
 
-  width: 30%;
-  height: 80px;
+  width: 50%;
+  height: 50px;
   
   position: absolute;
   left: 25%;
-  top: 15%;
+  top: 19%;
 }
 
 .sortButton {
@@ -86,3 +126,4 @@ body {
   right: 25%;
   top: 30%;
 }
+
