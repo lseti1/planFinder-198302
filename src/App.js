@@ -15,7 +15,7 @@ function App() {
     <div className="SearchBar">
       <input type="search" className="SearchArea" placeholder="Search for Plan..."></input>
     </div>
-    <div className="sortButton">Sort Button</div>
+    <div className="sortButton">Sort By:</div>
     <div className="filterButtons">Filters Section</div>
     <div className="searchResults">Search Results - This section will need to update to allow scrolling to the bottom tho</div>
     </div>

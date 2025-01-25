@@ -3,7 +3,10 @@
 }
 
 body {
-  background: linear-gradient(to top, rgb(255, 255, 255) 75%, rgb(119, 155, 223) 25%);
+  background: linear-gradient(to bottom, rgb(155, 88, 0) 25%, rgba(255, 255, 255, 0.719) 25%), url('/public/cityBackground.png');
+  background-position: center bottom;
+  background-repeat: no repeat;
+  background-size: contain;
 
   width: 100vw;
   height: 100vh;
@@ -98,16 +101,25 @@ body {
 }
 
 .sortButton {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.068);
+  border: 1px solid black;
+  border-radius: 10px;
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
 
   width: 15%;
-  height: 2%;
-  
+  height: 2.5%;
+
+  cursor: pointer;
+  transition: background-color 0.2s;
+
   position: absolute;
   right: 25%;
   top: 27%;
+}
+
+.sortButton:hover {
+  background-color: rgba(128, 128, 128, 0.377);
 }
 
 .filterButtons {
