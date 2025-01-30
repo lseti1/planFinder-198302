@@ -7,6 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchType, setSearchType] = useState('touristAttractions'); 
+  const [firstPageContent, setFirstPageContent] = useState('');
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -49,12 +50,14 @@ function App() {
       const searchResults = data.query.search;
       setResults(searchResults);
 
+      // Step 2: Fetch content of the first page
       if (searchResults.length > 0) {
         const firstPageId = searchResults[0].pageid;
         const contentUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=false&explaintext=false&pageids=${firstPageId}&origin=*`;
         const contentResponse = await fetch(contentUrl);
         const contentData = await contentResponse.json();
 
+        // Step 3: Extract and set the content of the first page
         const firstPageExtract = contentData.query.pages[firstPageId].extract;
         setFirstPageContent(firstPageExtract);
       }
@@ -106,12 +109,12 @@ function App() {
           )}
       </div>
       <div className="searchResults">
-        {firstPageContent && (
-          <div>
-            <h2>Content from the First Page Link:</h2>
-            <div dangerouslySetInnerHTML={{ __html: firstPageContent }} />
-          </div>
-        )}
+      {firstPageContent && (
+        <div>
+          <h2>Content from the First Result:</h2>
+          <div dangerouslySetInnerHTML={{ __html: firstPageContent }} />
+        </div>
+      )}
       </div>
     </div>
     </form>
