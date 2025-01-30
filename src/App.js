@@ -40,10 +40,23 @@ function App() {
       const response = await fetch(url);
       const data = await response.json();
 
-      if (data.query && data.query.search) {
-        setResults(data.query.search);
-      } else {
-        setResults([]); // for No results
+      if (!data.query || !data.query.search) {
+        setResults([]);
+        setFirstPageContent('');
+        return;
+      }
+
+      const searchResults = data.query.search;
+      setResults(searchResults);
+
+      if (searchResults.length > 0) {
+        const firstPageId = searchResults[0].pageid;
+        const contentUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=false&explaintext=false&pageids=${firstPageId}&origin=*`;
+        const contentResponse = await fetch(contentUrl);
+        const contentData = await contentResponse.json();
+
+        const firstPageExtract = contentData.query.pages[firstPageId].extract;
+        setFirstPageContent(firstPageExtract);
       }
     } catch (error) {
       setError('Failed to fetch data from Wikipedia.');
@@ -80,8 +93,7 @@ function App() {
         </select>
         <button type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
       </div>
-      <div className="filterButtons">Filters Section</div>
-      <div className="searchResults">
+      <div className="filterButtons">
         {results.length > 0 ? (
             <ul> {results.map((result) => (
               <li key={result.pageid}>
@@ -92,6 +104,14 @@ function App() {
           ) : (
             !loading && <p>No results were found.</p>
           )}
+      </div>
+      <div className="searchResults">
+        {firstPageContent && (
+          <div>
+            <h2>Content from the First Page Link:</h2>
+            <div dangerouslySetInnerHTML={{ __html: firstPageContent }} />
+          </div>
+        )}
       </div>
     </div>
     </form>
