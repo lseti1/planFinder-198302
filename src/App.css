@@ -94,29 +94,35 @@ body {
   top: 19%;
 }
 
-.filterButtons {
-  background-color: rgba(0, 0, 0, 0.2);
-  text-align: center;
-  color: white;
+.searchLinks {
+  background-color: rgba(0, 0, 0, 0.089);
+  text-align: left;
+  text-indent: 20px;
+  color: rgb(0, 0, 0);
 
-  width: 12%;
+  width: 14%;
   height: 300px;
   
   position: absolute;
-  left: 25%;
-  top: 30%;
+  right: 25%;
+  top: 28%;
+}
+
+.searchLinks li {
+  list-style-type: square;
+  margin-left: 0;
 }
 
 .searchResults {
-  background-color: rgba(0, 0, 0, 0.2);
-  text-align: center;
-  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: left;
+  color: rgb(0, 0, 0);
 
-  width: 37%;
+  width: 35%;
   height: 50%;
   
   position: absolute;
-  right: 25%;
-  top: 30%;
+  left: 25%;
+  top: 28%;
 }
 
