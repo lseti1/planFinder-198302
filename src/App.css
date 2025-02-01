@@ -3,7 +3,7 @@
 }
 
 body {
-  background: linear-gradient(to bottom, rgb(155, 88, 0) 25%, rgba(255, 255, 255, 0.719) 25%), url('/public/cityBackground.png');
+  background: linear-gradient(to bottom, rgb(155, 88, 0) 30%, rgba(255, 255, 255, 0.719) 25%), url('/public/cityBackground.png');
   background-position: center bottom;
   background-repeat: no repeat;
   background-size: contain;
@@ -23,7 +23,7 @@ body {
   
   position: absolute;
   left: 25%;
-  top: 0%;
+  top: 2%;
 }
 
 .IconsSignIn {
@@ -40,7 +40,7 @@ body {
   
   position: absolute;
   right: 25%;
-  top: 0%;
+  top: 2%;
 }
 
 .buttons {
@@ -59,7 +59,7 @@ body {
 
   position: absolute;
   left: 25%;
-  top: 7%;
+  top: 9%;
 }
 
 .InfoCard2 {
@@ -74,7 +74,7 @@ body {
 
   position: absolute;
   left: 25%;
-  top: 12%;
+  top: 15%;
 }
 
 
@@ -91,21 +91,21 @@ body {
   
   position: absolute;
   left: 25%;
-  top: 19%;
+  top: 24%;
 }
 
 .searchLinks {
-  background-color: rgba(0, 0, 0, 0.089);
+  background-color: rgba(0, 0, 0, 0.055);
   text-align: left;
   text-indent: 20px;
   color: rgb(0, 0, 0);
 
-  width: 14%;
+  width: 15%;
   height: 300px;
   
   position: absolute;
   right: 25%;
-  top: 28%;
+  top: 33%;
 }
 
 .searchLinks li {
@@ -118,11 +118,25 @@ body {
   text-align: left;
   color: rgb(0, 0, 0);
 
-  width: 35%;
+  width: 34%;
   height: 50%;
   
   position: absolute;
   left: 25%;
-  top: 28%;
+  top: 33%;
 }
+
+.bottomText {
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.459);
+
+  width: 10%;
+  height: 5%;
+  
+  position: absolute;
+  left: 45%;
+  bottom: 1%;
+}
+
 

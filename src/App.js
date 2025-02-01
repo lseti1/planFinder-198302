@@ -109,9 +109,9 @@ function App() {
         <button type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
       </div>
       <div className="searchLinks">
-        <h2>Articles Found:</h2>
+        <h2>Other Articles Found:</h2>
         {results.length > 0 ? (
-            <ul> {results.map((result) => (
+            <ul> {results.slice(1).map((result) => (
               <li key={result.pageid}>
                 <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
               </li> ))}
@@ -125,9 +125,14 @@ function App() {
         <div>
           <h2>About the {searchType} in {city}</h2>
           <p>{summary}</p>
+          <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Click Here To Read More About This Article</a>
         </div>
       )}
       </div>
+      <div className='bottomText'>
+        <p>Powered By Wikipedia API</p>
+      </div>
+
     </div>
     </form>
   );
