@@ -7,22 +7,20 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchType, setSearchType] = useState('Attractions'); 
-  const [summary, setSummary] = useState('');
 
+  const [summary, setSummary] = useState('');
   const [city, setCity] =  useState('');
 
   const fetchData = async () => {
     if (!query.trim()) {
-      // If the query is empty, clear the results and return
       setResults([]);
       return;
     }
-
     setLoading(true);
     setError(null);
 
     try {
-      // Just to make the search more speicific
+      // To ensure that the search title is understandable and works with the on screen selector
       let searchQuery = "List of ";
       let city = query;
       setCity(city);
@@ -37,29 +35,27 @@ function App() {
       } else if (searchType === 'beaches') {
         searchQuery += 'beaches ';
       } 
-      
-      searchQuery += "in " + city; // To Specify Search
+      searchQuery += "in " + city; 
       console.log("Full Search: ", searchQuery);
 
+      // To get the list of articles and set up displays
       const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${encodeURIComponent(searchQuery)}&format=json&origin=*`);
       const data = await response.json();
-
       if (!data.query || !data.query.search) {
         setResults([]);
         setSummary('');
         return;
       }
 
-      // Updated Search Logic Here To Prevent Unwanted Search Pages
+      // To Make Search Articles More Precise
       const searchResults = data.query.search;
       const filteredResults = searchResults.filter(result => 
         result.title.toLowerCase().includes(city.toLowerCase())
-        // && result.title.toLowerCase().includes(searchType.toLowerCase()) // Don't know about this line, may take it out for the purposes of having content on screen
       );
       console.log(filteredResults.length);
       setResults(filteredResults);
 
-      // Fetch content of the first page
+      // To Get and display Content from the First Article Found
       if (searchResults.length > 0) {
         const firstPageTitle = searchResults[0].title;
         console.log("Title = ", firstPageTitle);
@@ -68,21 +64,21 @@ function App() {
           const contentData = await contentResponse.json();
           setSummary(contentData.extract);
         } catch (error) {
-          console.error("Error fetching Wikipedia summary:", error);
-          setSummary("Failed to fetch summary.");
+          console.error("Error fetching Wikipedia Content:", error);
+          setSummary("Failed fetching Wikipedia Content.");
         }
       } 
     } catch (error) {
-      setError('Failed to fetch data from Wikipedia.');
-      console.error(error);
+      setError("Failed fetching Wikipedia Content.");
+      console.error("Error fetching Wikipedia Content:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // just stops page from reloading
-    fetchData(); // 
+    e.preventDefault(); // to stop page from reloading
+    fetchData(); 
   };
 
   return (
@@ -115,15 +111,12 @@ function App() {
               <li key={result.pageid}>
                 <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
               </li> ))}
-            </ul>
-          ) : (
-            !loading && <p>No results were found.</p>
-          )}
+            </ul> ) : (!loading && <p>No results were found.</p>)}
       </div>
       <div className="searchResults">
       {summary && (
         <div>
-          <h2>About the {searchType} in {city}</h2>
+          <h2>{results[0].title}</h2>
           <p>{summary}</p>
           <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Click Here To Read More About This Article</a>
         </div>
