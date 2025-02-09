@@ -6,7 +6,7 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchType, setSearchType] = useState('Attractions'); 
+  const [searchType, setSearchType] = useState('museums'); 
 
   const [summary, setSummary] = useState('');
   const [city, setCity] =  useState('');
@@ -105,7 +105,7 @@ function App() {
         <button type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
       </div>
       <div className="searchLinks">
-        <h2>Other Articles Found:</h2>
+        <h2>Other Articles:</h2>
         {results.length > 0 ? (
             <ul> {results.slice(1).map((result) => (
               <li key={result.pageid}>
@@ -123,7 +123,7 @@ function App() {
       )}
       </div>
       <div className='bottomText'>
-        <p>Powered By Wikipedia API</p>
+        <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
       </div>
 
     </div>
