@@ -104,28 +104,30 @@ function App() {
         </select>
         <button className="searchButton" type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
       </div>
-      <div className="searchLinks">
-        <h2>Other Articles:</h2>
-        {results.length > 0 ? (
-            <ul> {results.slice(1).map((result) => (
-              <li key={result.pageid}>
-                <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
-              </li> ))}
-            </ul> ) : (!loading && <p>No results were found.</p>)}
-      </div>
-      <div className="searchResults">
-        {summary ? (
+      {summary && (
+        <div className="searchLinks">
+          <h2>Other Articles:</h2>
+          {results.length > 0 ? (
+              <ul> {results.slice(1).map((result) => (
+                <li key={result.pageid}>
+                  <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
+                </li> ))}
+              </ul> ) : (!loading && <p>No other  results found.</p>)}
+        </div>
+      )}
+      {summary ? (
+        <div className="searchResults">
           <div>
             <h2>{results[0].title}</h2>
             <p>{summary}</p>
             <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
           </div>
-        ) : (
-          <div>
-            <h3>To get started, enter the city you're at into the search bar above, select what you're looking for specifically and then search!</h3>
-          </div>
-        )} 
-      </div>
+        </div>
+      ) : (
+        <div className="instructions">
+          <h2>To get started, enter the city you're at into the search bar above, select what you're looking for specifically and then hit search!</h2>  
+        </div>
+      )} 
       <div className='bottomText'>
         <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
       </div>

@@ -186,6 +186,16 @@ button:hover {
   top: 33%;
 }
 
+.instructions {
+  /* background-color: rgba(0, 0, 0, 0.295); */
+  font-size: 1.7vh;
+  width: 40%;
+
+  position: absolute;
+  left: 30%;
+  top: 33%;
+}
+
 .bottomText {
   display: grid;
   background-color: rgba(0, 0, 0, 0);
