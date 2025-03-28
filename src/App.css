@@ -156,8 +156,9 @@ button:hover {
   text-align: left;
   text-indent: 20px;
   color: rgb(0, 0, 0);
+  border-radius: 5px;
 
-  width: 15%;
+  width: 15.5%;
   height: 300px;
   
   position: absolute;
@@ -172,12 +173,12 @@ button:hover {
 }
 
 .searchResults {
-  background-color: rgba(0, 0, 0, 0);
+  /* background-color: rgba(0, 0, 0, 0.295); */
   font-size: 1.7vh;
   text-align: left;
   color: rgb(0, 0, 0);
 
-  width: 34%;
+  width: 30%;
   height: 50%;
   
   position: absolute;
