@@ -34,8 +34,8 @@ function App() {
         searchQuery += 'monuments ';
       } else if (searchType === 'beaches') {
         searchQuery += 'beaches ';
-      } 
-      searchQuery += "in " + city; 
+      }
+      searchQuery += "in " + city;
       console.log("Full Search: ", searchQuery);
 
       // To get the list of articles and set up displays
@@ -49,7 +49,7 @@ function App() {
 
       // To Make Search Articles More Precise
       const searchResults = data.query.search;
-      const filteredResults = searchResults.filter(result => 
+      const filteredResults = searchResults.filter(result =>
         result.title.toLowerCase().includes(city.toLowerCase())
       );
       console.log(filteredResults.length);
@@ -67,7 +67,7 @@ function App() {
           console.error("Error fetching Wikipedia Content:", error);
           setSummary("Failed fetching Wikipedia Content.");
         }
-      } 
+      }
     } catch (error) {
       setError("Failed fetching Wikipedia Content.");
       console.error("Error fetching Wikipedia Content:", error);
@@ -86,23 +86,23 @@ function App() {
     <div className="App">
       <div className="Title"><h2>Plan Finder</h2></div>
       <div className="IconsSignIn">
-        <button className="buttons">Sign In</button>
-        <button className="buttons">Register</button>
+        <button className="signIn">Sign In</button>
+        <button className="register">Register</button>
       </div>
       <div >
         <h1 className="InfoCard1">Search for things to do on your holiday!</h1>
         <p className="InfoCard2">Look for attractions, parks, museums and more... </p>
       </div>
-      <div className="SearchBar">
-        <input type="search" className="SearchArea" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query}/>
-        <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+      <div className="searchBar">
+        <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query}/>
+        <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
           <option value="Attractions">Tourist Attractions</option>
           <option value="museums">Museums</option>
           <option value="parks">Parks & Gardens</option>
           <option value="monuments">Monuments</option>
           <option value="beaches">Beaches</option>
         </select>
-        <button type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
+        <button className="searchButton" type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
       </div>
       <div className="searchLinks">
         <h2>Other Articles:</h2>
@@ -118,7 +118,7 @@ function App() {
         <div>
           <h2>{results[0].title}</h2>
           <p>{summary}</p>
-          <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Click Here To Read More About This Article</a>
+          <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
         </div>
       )}
       </div>
