@@ -11,9 +11,17 @@ body {
   height: 100vh;
 }
 
+h1 {
+  padding: 0px;
+  margin: 0px;
+}
+
 .Title {
-  display: grid;
-  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /* background-color: rgba(255, 255, 255, 0.699); */
   text-align: left;
   color: white;
   font-size: 2vh;
@@ -24,7 +32,7 @@ body {
   
   position: absolute;
   left: 25%;
-  top: 2%;
+  top: 5%;
 }
 
 button {
@@ -56,19 +64,20 @@ button:hover {
 
 .IconsSignIn {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
   grid-template-columns: 1fr 1fr;
   /* background-color: rgba(255, 255, 255, 0.342); */
   color: white;
   gap: 10px;
 
-  width: 10%;
+  width: 12%;
   height: 8%;
   
   position: absolute;
   right: 25%;
-  top: 2%;
+  top: 5%;
 }
 
 .InfoCard1 {

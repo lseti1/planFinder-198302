@@ -1,5 +1,7 @@
 import './App.css';
 import React, {useState} from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -84,13 +86,13 @@ function App() {
   return (
     <form onSubmit={handleSubmit}>
     <div className="App">
-      <div className="Title"><h2>Plan Finder</h2></div>
+      <div className="Title"><h1>Plan Finder</h1></div>
       <div className="IconsSignIn">
-        <button className="signIn">Sign In</button>
-        <button className="register">Register</button>
+        <button className="signIn"><FontAwesomeIcon icon={faUser}/> Sign In</button>
+        <button className="register"><FontAwesomeIcon icon={faUserPlus}/> Sign Up</button>
       </div>
       <div >
-        <h1 className="InfoCard1">Search for things to do on your holiday!</h1>
+        <h2 className="InfoCard1">Search for things to do on your holiday!</h2>
         <p className="InfoCard2">Look for attractions, parks, museums and more... </p>
       </div>
       <div className="searchBar">
