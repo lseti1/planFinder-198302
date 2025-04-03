@@ -12,6 +12,8 @@ function App() {
 
   const [summary, setSummary] = useState('');
   const [city, setCity] =  useState('');
+  const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
+  const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -83,13 +85,18 @@ function App() {
     fetchData(); 
   };
 
+  const switchSignInUpModals = () => {
+    setIsSignInModalVisible(prevState => !prevState);
+    setIsSignUpModalVisible(prevState => !prevState);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
     <div className="App">
       <div className="Title"><h1>Plan Finder</h1></div>
       <div className="IconsSignIn">
-        <button className="signIn"><FontAwesomeIcon icon={faUser}/> Sign In</button>
-        <button className="register"><FontAwesomeIcon icon={faUserPlus}/> Sign Up</button>
+        <button className="signIn" onClick={() => setIsSignInModalVisible(true)}><FontAwesomeIcon icon={faUser}/> Sign In</button>
+        <button className="register" onClick={() => setIsSignUpModalVisible(true)}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</button>
       </div>
       <div >
         <h2 className="InfoCard1">Search for things to do on your holiday!</h2>
@@ -127,12 +134,47 @@ function App() {
         </div>
       ) : (
         <div className="instructions">
-          <h2>To get started, enter the city you're at into the search bar above, select what you're looking for specifically and then hit search!</h2>  
+          <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>  
         </div>
       )} 
       <div className='bottomText'>
         <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
       </div>
+
+      {isSignInModalVisible && (
+        <div className='modal'>
+          <h1>Log In</h1>
+          <input className= 'modalTextInputs' type='text' placeholder='Email Address'/>
+          <input className= 'modalTextInputs' type='text' placeholder='Password'/>
+          <p>Forgot Password?</p>
+          <button className='modalSubmitButton' type='submit' onClick={() => setIsSignInModalVisible(false)}>Sign In</button>
+          <button className='modalExitButton' onClick={() => setIsSignInModalVisible(false)}>X</button>
+          <button className='linkedButton'>Can't Access Account?</button>
+          <p>Don't have an account?
+            <button className="linkedButton" onClick={switchSignInUpModals}>
+              Sign Up Here
+            </button>
+          </p>
+          <p className='disclaimer'>Please Note: For visual purposes, Sign In capabilities are off.</p>
+        </div>
+      )}
+
+      {isSignUpModalVisible && (
+        <div className='modal'>
+          <h1>Set Up Your Account</h1>
+          <input className= 'modalTextInputs' type='text' placeholder='Email Address'/>
+          <input className= 'modalTextInputs' type='text' placeholder='Password'/>
+          <input className= 'modalTextInputs' type='text' placeholder='Confirm Password'/>
+          <button className='modalSubmitButton' type='submit' onClick={() => setIsSignUpModalVisible(false)}>Sign Up</button>
+          <button className='modalExitButton' onClick={() => setIsSignUpModalVisible(false)}>X</button>
+          <p>Already have an account?
+            <button className="linkedButton" onClick={switchSignInUpModals}>
+              Log In Here
+            </button>
+          </p>
+          <p className='disclaimer'>Please Note: For visual purposes, Sign Up capabilities are off.</p>
+        </div>
+      )}
 
     </div>
     </form>
