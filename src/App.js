@@ -145,7 +145,7 @@ function App() {
             <p>Forgot Password?</p>
             <button className='modalSubmitButton' type='submit' onClick={() => setIsSignInModalVisible(false)}>Sign In</button>
             <button className='modalExitButton' onClick={() => setIsSignInModalVisible(false)}>X</button>
-            <button className='linkedButton'>Can't Access Account?</button>
+            <button className='linkedButton' onClick={() => setIsSignInModalVisible(false)}>Can't Access Account?</button>
             <p>Don't have an account?
               <button className="linkedButton" onClick={switchSignInUpModals}>
                 Sign Up Here
