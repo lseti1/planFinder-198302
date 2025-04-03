@@ -237,11 +237,14 @@ button:hover {
 }
 
 .searchLinks {
+  display: flex;
+  flex-direction: column;
   background-color: rgba(0, 0, 0, 0.055);
   font-size: 1.7vh;
   text-align: left;
   text-indent: 20px;
   color: rgb(0, 0, 0);
+  padding: 15px 0px;
   border-radius: 5px;
 
   width: 15.5%;
@@ -259,10 +262,13 @@ button:hover {
 }
 
 .searchResults {
-  /* background-color: rgba(0, 0, 0, 0.295); */
+  display: flex;
+  flex-direction: column;
   font-size: 1.7vh;
   text-align: left;
   color: rgb(0, 0, 0);
+  gap: 3%;
+  padding: 15px 0px;
 
   width: 30%;
   height: 50%;
@@ -282,8 +288,10 @@ button:hover {
   top: 33%;
 }
 
-.bottomText {
-  display: grid;
+.projectDisclaimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0);
   text-align: center;
   color: rgba(0, 0, 0, 0.274);
@@ -294,7 +302,7 @@ button:hover {
   
   position: absolute;
   left: 0%;
-  bottom: 3%;
+  bottom: 1%;
 }
 
 .disclaimer {
