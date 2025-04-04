@@ -2,6 +2,8 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import ModalWrapper from './components/modals/ModalWrapper';
+import DynamicModalContent from './components/modals/DynamicModalContent';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -15,6 +17,9 @@ function App() {
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalType, setModalType] = useState(null);
+
+  const closeModal = () => setModalType(null);
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -109,8 +114,8 @@ function App() {
       <div className="App">
         <div className="Title"><h1>Plan Finder</h1></div>
         <div className="IconsSignIn">
-          <button className="signIn" onClick={() => setIsSignInModalVisible(true)}><FontAwesomeIcon icon={faUser} /> Sign In</button>
-          <button className="register" onClick={() => setIsSignUpModalVisible(true)}><FontAwesomeIcon icon={faUserPlus} /> Sign Up</button>
+          <button className="signIn" onClick={() => setModalType('signIn')}><FontAwesomeIcon icon={faUser} /> Sign In</button>
+          <button className="register" onClick={() => setModalType('signUp')}><FontAwesomeIcon icon={faUserPlus} /> Sign Up</button>
         </div>
         <div >
           <h2 className="InfoCard1">Search for things to do on your holiday!</h2>
@@ -149,46 +154,10 @@ function App() {
             <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>
           </div>
         )}
-
-        {isSignInModalVisible && (
-          <div className='modal'>
-            <h1>Log In</h1>
-            <input className='modalTextInputs' type='text' placeholder='Email Address' />
-            <input className='modalTextInputs' type='text' placeholder='Password' />
-            <button className="linkedButton" onClick={switchSignInUpModals}>
-              Forgot Password?
-            </button>
-            <button className='modalSubmitButton' type='submit' onClick={() => setIsSignInModalVisible(false)}>Sign In</button>
-            <button className='modalExitButton' onClick={() => setIsSignInModalVisible(false)}>X</button>
-            <button className='linkedButton' onClick={() => setIsSignInModalVisible(false)}>Can't Access Account?</button>
-            <p>Don't have an account?
-              <button className="linkedButton" onClick={switchSignInUpModals}>
-                Sign Up Here
-              </button>
-            </p>
-            <p className='disclaimer'>Please Note: For visual purposes, Sign In capabilities are off.</p>
-          </div>
-        )}
-
-        {isSignUpModalVisible && (
-          <div className='modal'>
-            <h1>Set Up Your Account</h1>
-            <input className='modalTextInputs' type='text' placeholder='Email Address' />
-            <input className='modalTextInputs' type='text' placeholder='Password' />
-            <input className='modalTextInputs' type='text' placeholder='Confirm Password' />
-            <button className='modalSubmitButton' type='submit' onClick={() => setIsSignUpModalVisible(false)}>Sign Up</button>
-            <button className='modalExitButton' onClick={() => setIsSignUpModalVisible(false)}>X</button>
-            <p>Already have an account?
-              <button className="linkedButton" onClick={switchSignInUpModals}>
-                Log In Here
-              </button>
-            </p>
-            <p className='disclaimer'>Please Note: For visual purposes, Sign Up capabilities are off.</p>
-          </div>
-        )}
-
-        {isModalVisible && (
-          <div className='modalBackground' onClick={() => removeModals()}></div>
+        {modalType && (
+            <ModalWrapper onClose={closeModal}>
+              <DynamicModalContent type={modalType}/>
+            </ModalWrapper>
         )}
 
       </div>

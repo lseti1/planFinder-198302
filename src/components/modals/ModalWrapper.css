@@ -1,0 +1,38 @@
+.modalBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    width: 25%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    z-index: 1000;
+  
+  
+    position: absolute;
+    left: 37.5%;
+    bottom: 25%;
+  
+  }
+
+  .modalBackground {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+  
+    background-color: rgba(0, 0, 0, 0.50);
+  }
+
+  .modalExitButton {
+    display: flex;
+  
+    box-sizing: border-box;
+    padding: 10px 15px;
+    position: absolute;
+    top: 3%;
+    right: 3%;
+  }
+  
