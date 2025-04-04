@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 
@@ -14,6 +14,7 @@ function App() {
   const [city, setCity] =  useState('');
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -89,6 +90,19 @@ function App() {
     setIsSignInModalVisible(prevState => !prevState);
     setIsSignUpModalVisible(prevState => !prevState);
   };
+
+  const removeModals = () => {
+    setIsSignInModalVisible(false);
+    setIsSignUpModalVisible(false);
+  };
+
+  useEffect(() => {
+    if (isSignInModalVisible || isSignUpModalVisible) {
+      setIsModalVisible(true);
+    } else {
+      setIsModalVisible(false);
+    }
+  }, [isSignInModalVisible, isSignUpModalVisible]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -170,6 +184,10 @@ function App() {
             </p>
             <p className='disclaimer'>Please Note: For visual purposes, Sign Up capabilities are off.</p>
           </div>
+        )}
+
+        {isModalVisible && (
+          <div className='modalBackground' onClick={() => removeModals()}></div>
         )}
 
       </div>
