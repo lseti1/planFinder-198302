@@ -1,17 +1,17 @@
 import './App.css';
-import React, {useState, useEffect} from "react";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUser, faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchType, setSearchType] = useState('museums'); 
+  const [searchType, setSearchType] = useState('museums');
 
   const [summary, setSummary] = useState('');
-  const [city, setCity] =  useState('');
+  const [city, setCity] = useState('');
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -83,7 +83,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // to stop page from reloading
-    fetchData(); 
+    fetchData();
   };
 
   const switchSignInUpModals = () => {
@@ -109,15 +109,15 @@ function App() {
       <div className="App">
         <div className="Title"><h1>Plan Finder</h1></div>
         <div className="IconsSignIn">
-          <button className="signIn" onClick={() => setIsSignInModalVisible(true)}><FontAwesomeIcon icon={faUser}/> Sign In</button>
-          <button className="register" onClick={() => setIsSignUpModalVisible(true)}><FontAwesomeIcon icon={faUserPlus}/> Sign Up</button>
+          <button className="signIn" onClick={() => setIsSignInModalVisible(true)}><FontAwesomeIcon icon={faUser} /> Sign In</button>
+          <button className="register" onClick={() => setIsSignUpModalVisible(true)}><FontAwesomeIcon icon={faUserPlus} /> Sign Up</button>
         </div>
         <div >
           <h2 className="InfoCard1">Search for things to do on your holiday!</h2>
           <p className="InfoCard2">Look for attractions, parks, museums and more... </p>
         </div>
         <div className="searchBar">
-          <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query}/>
+          <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query} />
           <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
             <option value="Attractions">Tourist Attractions</option>
             <option value="museums">Museums</option>
@@ -131,32 +131,33 @@ function App() {
           <div className="searchLinks">
             <h2>Other Articles:</h2>
             {results.length > 0 ? (
-                <ul> {results.slice(1).map((result) => (
-                  <li key={result.pageid}>
-                    <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
-                  </li> ))}
-                </ul> ) : (!loading && <p>No other  results found.</p>)}
+              <ul> {results.slice(1).map((result) => (
+                <li key={result.pageid}>
+                  <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
+                </li>))}
+              </ul>) : (!loading && <p>No other  results found.</p>)}
           </div>
         )}
         {summary ? (
           <div className="searchResults">
-              <h2>{results[0].title}</h2>
-              <p>{summary}</p>
-              <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+            <h2>{results[0].title}</h2>
+            <p>{summary}</p>
+            <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
           </div>
         ) : (
           <div className="instructions">
-            <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>  
+            <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>
           </div>
-        )} 
-        
+        )}
 
         {isSignInModalVisible && (
           <div className='modal'>
             <h1>Log In</h1>
-            <input className= 'modalTextInputs' type='text' placeholder='Email Address'/>
-            <input className= 'modalTextInputs' type='text' placeholder='Password'/>
-            <p>Forgot Password?</p>
+            <input className='modalTextInputs' type='text' placeholder='Email Address' />
+            <input className='modalTextInputs' type='text' placeholder='Password' />
+            <button className="linkedButton" onClick={switchSignInUpModals}>
+              Forgot Password?
+            </button>
             <button className='modalSubmitButton' type='submit' onClick={() => setIsSignInModalVisible(false)}>Sign In</button>
             <button className='modalExitButton' onClick={() => setIsSignInModalVisible(false)}>X</button>
             <button className='linkedButton' onClick={() => setIsSignInModalVisible(false)}>Can't Access Account?</button>
@@ -172,9 +173,9 @@ function App() {
         {isSignUpModalVisible && (
           <div className='modal'>
             <h1>Set Up Your Account</h1>
-            <input className= 'modalTextInputs' type='text' placeholder='Email Address'/>
-            <input className= 'modalTextInputs' type='text' placeholder='Password'/>
-            <input className= 'modalTextInputs' type='text' placeholder='Confirm Password'/>
+            <input className='modalTextInputs' type='text' placeholder='Email Address' />
+            <input className='modalTextInputs' type='text' placeholder='Password' />
+            <input className='modalTextInputs' type='text' placeholder='Confirm Password' />
             <button className='modalSubmitButton' type='submit' onClick={() => setIsSignUpModalVisible(false)}>Sign Up</button>
             <button className='modalExitButton' onClick={() => setIsSignUpModalVisible(false)}>X</button>
             <p>Already have an account?
@@ -192,7 +193,7 @@ function App() {
 
       </div>
       <div className='projectDisclaimer'>
-          <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
+        <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
       </div>
     </form>
   );
