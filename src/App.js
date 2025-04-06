@@ -13,6 +13,7 @@ function App() {
   const [searchType, setSearchType] = useState('museums');
 
   const [summary, setSummary] = useState('');
+  const [summary2, setSummary2] = useState('');
   const [city, setCity] = useState('');
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
@@ -51,11 +52,11 @@ function App() {
       // To get the list of articles and set up displays
       const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${encodeURIComponent(searchQuery)}&format=json&origin=*`);
       const data = await response.json();
-      if (!data.query || !data.query.search) {
-        setResults([]);
-        setSummary('');
-        return;
-      }
+      // if (!data.query || !data.query.search) {
+      //   setResults([]);
+      //   setSummary('');
+      //   return;
+      // }
 
       // To Make Search Articles More Precise
       const searchResults = data.query.search;
@@ -66,16 +67,21 @@ function App() {
       setResults(filteredResults);
 
       // To Get and display Content from the First Article Found
-      if (searchResults.length > 0) {
+      if (searchResults.length > 1) {
         const firstPageTitle = searchResults[0].title;
+        const secondPageTitle = searchResults[1].title;
         console.log("Title = ", firstPageTitle);
         try {
           const contentResponse = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(firstPageTitle)}`);
           const contentData = await contentResponse.json();
           setSummary(contentData.extract);
+          const contentResponse2 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(secondPageTitle)}`);
+          const contentData2 = await contentResponse2.json();
+          setSummary2(contentData2.extract);
         } catch (error) {
           console.error("Error fetching Wikipedia Content:", error);
           setSummary("Failed fetching Wikipedia Content.");
+          setSummary2("Failed fetching Wikipedia Content.");
         }
       }
     } catch (error) {
@@ -136,7 +142,7 @@ function App() {
           <div className="searchLinks">
             <h2>Other Articles:</h2>
             {results.length > 0 ? (
-              <ul> {results.slice(1).map((result) => (
+              <ul> {results.slice(2).map((result) => (
                 <li key={result.pageid}>
                   <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
                 </li>))}
@@ -150,7 +156,12 @@ function App() {
             <button className='readArticleButton'>
               <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
             </button>
-            
+
+            <h2>{results[1].title}</h2>
+            <p>{summary2}</p>
+            <button className='readArticleButton'>
+              <a href={`https://en.wikipedia.org/?curid=${results[1].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+            </button>
           </div>
         ) : (
           <div className="instructions">

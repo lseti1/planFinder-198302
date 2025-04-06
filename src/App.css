@@ -211,9 +211,10 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.055);
   font-size: 1.7vh;
   text-align: left;
-  text-indent: 20px;
+  
   color: rgb(0, 0, 0);
-  padding: 15px 0px;
+  box-sizing: border-box;
+  padding: 10px 20px;
   border-radius: 5px;
 
   width: 15.5%;
