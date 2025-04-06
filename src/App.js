@@ -147,7 +147,10 @@ function App() {
           <div className="searchResults">
             <h2>{results[0].title}</h2>
             <p>{summary}</p>
-            <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+            <button className='readArticleButton'>
+              <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+            </button>
+            
           </div>
         ) : (
           <div className="instructions">

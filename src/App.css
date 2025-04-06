@@ -247,6 +247,17 @@ button:hover {
   top: 33%;
 }
 
+.readArticleButton {
+  box-shadow: none;
+  text-align: left;
+  padding: 0px;
+  cursor: default;
+}
+
+.readArticleButton:hover {
+  background-color: rgba(255, 255, 255, 0);
+}
+
 .instructions {
   /* background-color: rgba(0, 0, 0, 0.295); */
   font-size: 1.7vh;
