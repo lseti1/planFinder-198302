@@ -216,6 +216,7 @@ button:hover {
   box-sizing: border-box;
   padding: 10px 20px;
   border-radius: 5px;
+  box-shadow: 0px 0px 5px grey;
 
   width: 15.5%;
   height: 300px;
