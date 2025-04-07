@@ -34,6 +34,7 @@ function App() {
   }
 
   const isTopArticlesShown = articleAccessValue1 == 0;
+  const isMaxArticlesReached = articleAccessValue1 + 2 > results.length;
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -162,7 +163,9 @@ function App() {
                 <button className='articleButton prev' onClick={() => adjustArticleAccessValues("-")}>&lt;</button>
               </>
             )}
-            <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
+            {!isMaxArticlesReached && (
+                <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
+            )}
             <h2>{results[articleAccessValue1].title}</h2>
             <p>{summary}</p>
             <button className='readArticleButton'>
