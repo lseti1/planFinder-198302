@@ -218,6 +218,10 @@ button:hover {
   border-radius: 5px;
   box-shadow: 0px 0px 5px grey;
 
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
   width: 17%;
   height: 300px;
   
