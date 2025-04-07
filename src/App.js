@@ -132,14 +132,24 @@ function App() {
           <div className="searchLinks">
             <h2>Articles:</h2>
             <h3>Top 2 Articles:</h3>
-            <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">{results[0].title}</a>
-            <a href={`https://en.wikipedia.org/?curid=${results[1].pageid}`} target="_blank" rel="noopener noreferrer">{results[1].title}</a>
+            <a 
+              className={articleAccessValue1 == 0 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} 
+              target="_blank" rel="noopener noreferrer">{results[0].title}
+            </a>
+            <a 
+              className={articleAccessValue2 == 1 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${results[1].pageid}`} 
+              target="_blank" rel="noopener noreferrer">{results[1].title}
+            </a>
             <div><br   /></div>
             <h3>Other Articles:</h3>
             {results.length > 0 ? (
-              <ul> {results.slice(2).map((result) => (
+              <ul> {results.slice(2).map((result, index) => (
                 <li key={result.pageid}>
-                  <a href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">{result.title}</a>
+                  <a 
+                    className={index + 2 == articleAccessValue1 || index + 2 == articleAccessValue2 ? "linkHighlight" : ""} 
+                    href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">
+                    {result.title}
+                  </a>
                 </li>))}
               </ul>) : (!loading && <p>No other  results found.</p>)}
           </div>

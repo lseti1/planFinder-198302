@@ -233,6 +233,10 @@ button:hover {
   list-style-type: none;
 } 
 
+.linkHighlight {
+  font-weight: 700;
+}
+
 .searchResults {
   display: flex;
   flex-direction: column;
