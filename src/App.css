@@ -246,7 +246,12 @@ button:hover {
   color: rgb(0, 0, 0);
   gap: 3%;
   padding: 15px 0px;
+  padding-right: 15px;
   box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
 
   width: 30%;
   height: 50%;
@@ -270,15 +275,15 @@ button:hover {
 }
 
 .top2 {
-  right: 60px;
+  right: 75px;
 }
 
 .next {
-  right: 5px;
+  right: 20px;
 }
 
 .prev {
-  right: 30px;
+  right: 45px;
 }
 
 .readArticleButton {

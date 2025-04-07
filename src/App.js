@@ -18,6 +18,7 @@ function App() {
   const [modalType, setModalType] = useState(null);
   const [articleAccessValues, setArticleAccessValues] = useState([0, 1]);
   const [articleAccessValue1, articleAccessValue2] = articleAccessValues;
+  const [isMaxArticlesReached, setIsMaxArticlesReached] = useState(false);
 
   const closeModal = () => setModalType(null);
 
@@ -34,7 +35,15 @@ function App() {
   }
 
   const isTopArticlesShown = articleAccessValue1 == 0;
-  const isMaxArticlesReached = articleAccessValue1 + 2 > results.length;
+
+  useEffect(() => {
+    setArticleAccessValues([0, 1]);
+    setIsMaxArticlesReached(false);
+  }, [city]);
+
+  useEffect(() => {
+    setIsMaxArticlesReached(articleAccessValue1 + 2 > results.length || articleAccessValue2 + 2 > results.length);
+  }, [articleAccessValue1, articleAccessValue2]);
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -47,8 +56,7 @@ function App() {
     try {
       // To ensure that the search title is understandable and works with the on screen selector
       let searchQuery = "List of ";
-      let city = query;
-      setCity(city);
+      setCity(query);
       if (searchType === 'Attractions') {
         searchQuery += 'attractions ';
       } else if (searchType === 'museums') {
@@ -60,7 +68,7 @@ function App() {
       } else if (searchType === 'beaches') {
         searchQuery += 'beaches ';
       }
-      searchQuery += "in " + city;
+      searchQuery += "in " + query;
       console.log("Full Search: ", searchQuery);
 
       // To get the list of articles and set up displays
