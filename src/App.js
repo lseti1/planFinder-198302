@@ -15,12 +15,25 @@ function App() {
   const [summary, setSummary] = useState('');
   const [summary2, setSummary2] = useState('');
   const [city, setCity] = useState('');
-  const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
-  const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalType, setModalType] = useState(null);
+  const [articleAccessValues, setArticleAccessValues] = useState([0, 1]);
+  const [articleAccessValue1, articleAccessValue2] = articleAccessValues;
 
   const closeModal = () => setModalType(null);
+
+  const adjustArticleAccessValues = (type) => {
+    if (type == "+") {
+      setArticleAccessValues([articleAccessValue1 + 2, articleAccessValue2 + 2]);
+    }
+    else if (type == "-") {
+      setArticleAccessValues([articleAccessValue1 - 2, articleAccessValue2 - 2]);
+    }
+    else if (type == "default") {
+      setArticleAccessValues([0, 1]);
+    }
+  }
+
+  const isTopArticlesShown = articleAccessValue1 == 0;
 
   const fetchData = async () => {
     if (!query.trim()) {
@@ -52,11 +65,6 @@ function App() {
       // To get the list of articles and set up displays
       const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${encodeURIComponent(searchQuery)}&format=json&origin=*`);
       const data = await response.json();
-      // if (!data.query || !data.query.search) {
-      //   setResults([]);
-      //   setSummary('');
-      //   return;
-      // }
 
       // To Make Search Articles More Precise
       const searchResults = data.query.search;
@@ -68,8 +76,8 @@ function App() {
 
       // To Get and display Content from the First Article Found
       if (searchResults.length > 1) {
-        const firstPageTitle = searchResults[0].title;
-        const secondPageTitle = searchResults[1].title;
+        const firstPageTitle = searchResults[articleAccessValue1].title;
+        const secondPageTitle = searchResults[articleAccessValue2].title;
         console.log("Title = ", firstPageTitle);
         try {
           const contentResponse = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(firstPageTitle)}`);
@@ -97,26 +105,7 @@ function App() {
     fetchData();
   };
 
-  const switchSignInUpModals = () => {
-    setIsSignInModalVisible(prevState => !prevState);
-    setIsSignUpModalVisible(prevState => !prevState);
-  };
-
-  const removeModals = () => {
-    setIsSignInModalVisible(false);
-    setIsSignUpModalVisible(false);
-  };
-
-  useEffect(() => {
-    if (isSignInModalVisible || isSignUpModalVisible) {
-      setIsModalVisible(true);
-    } else {
-      setIsModalVisible(false);
-    }
-  }, [isSignInModalVisible, isSignUpModalVisible]);
-
   return (
-    <form onSubmit={handleSubmit}>
       <div className="App">
         <div className="Title"><h1>Plan Finder</h1></div>
         <div className="IconsSignIn">
@@ -127,20 +116,26 @@ function App() {
           <h2 className="InfoCard1">Search for things to do on your holiday!</h2>
           <p className="InfoCard2">Look for attractions, parks, museums and more... </p>
         </div>
-        <div className="searchBar">
-          <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query} />
-          <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-            <option value="Attractions">Tourist Attractions</option>
-            <option value="museums">Museums</option>
-            <option value="parks">Parks & Gardens</option>
-            <option value="monuments">Monuments</option>
-            <option value="beaches">Beaches</option>
-          </select>
-          <button className="searchButton" type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="searchBar">
+            <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query} />
+            <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+              <option value="Attractions">Tourist Attractions</option>
+              <option value="museums">Museums</option>
+              <option value="parks">Parks & Gardens</option>
+              <option value="monuments">Monuments</option>
+              <option value="beaches">Beaches</option>
+            </select>
+            <button className="searchButton" type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
+          </div>
         {summary && (
           <div className="searchLinks">
-            <h2>Other Articles:</h2>
+            <h2>Articles:</h2>
+            <h3>Top 2 Articles:</h3>
+            <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">{results[0].title}</a>
+            <a href={`https://en.wikipedia.org/?curid=${results[1].pageid}`} target="_blank" rel="noopener noreferrer">{results[1].title}</a>
+            <div><br   /></div>
+            <h3>Other Articles:</h3>
             {results.length > 0 ? (
               <ul> {results.slice(2).map((result) => (
                 <li key={result.pageid}>
@@ -149,18 +144,25 @@ function App() {
               </ul>) : (!loading && <p>No other  results found.</p>)}
           </div>
         )}
-        {summary ? (
+        {summary ? (     
           <div className="searchResults">
-            <h2>{results[0].title}</h2>
+            {!isTopArticlesShown && (
+              <>
+                <button className='articleButton top2' onClick={() => adjustArticleAccessValues("default")}>Top 2</button>
+                <button className='articleButton prev' onClick={() => adjustArticleAccessValues("-")}>&lt;</button>
+              </>
+            )}
+            <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
+            <h2>{results[articleAccessValue1].title}</h2>
             <p>{summary}</p>
             <button className='readArticleButton'>
-              <a href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+              <a href={`https://en.wikipedia.org/?curid=${results[articleAccessValue1].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
             </button>
 
-            <h2>{results[1].title}</h2>
+            <h2>{results[articleAccessValue2].title}</h2>
             <p>{summary2}</p>
             <button className='readArticleButton'>
-              <a href={`https://en.wikipedia.org/?curid=${results[1].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+              <a href={`https://en.wikipedia.org/?curid=${results[articleAccessValue2].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
             </button>
           </div>
         ) : (
@@ -168,18 +170,20 @@ function App() {
             <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>
           </div>
         )}
+        </form>
         {modalType && (
             <ModalWrapper onClose={closeModal}>
               <DynamicModalContent type={modalType}/>
             </ModalWrapper>
         )}
-
-      </div>
       <div className='projectDisclaimer'>
         <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
       </div>
-    </form>
+      </div>
   );
 }
 
 export default App;
+
+{/* <form onSubmit={handleSubmit}>
+</form> */}
