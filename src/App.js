@@ -115,6 +115,15 @@ function App() {
         </form>
         {articleInfo.length > 1 && (
           <div className="searchLinks">
+            {!isTopArticlesShown && (
+              <>
+                <button className='articleButton top2' onClick={() => adjustArticleAccessValues("default")}>Top 2</button>
+                <button className='articleButton prev' onClick={() => adjustArticleAccessValues("-")}>&lt;</button>
+              </>
+            )}
+            {!isMaxArticlesReached && (
+                <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
+            )}
             <h2>Articles:</h2>
             <h3>Top 2 Articles:</h3>
             <a 
@@ -141,15 +150,6 @@ function App() {
         )}
         {articleInfo.length > 1 ? (     
           <div className="searchResults">
-            {!isTopArticlesShown && (
-              <>
-                <button className='articleButton top2' onClick={() => adjustArticleAccessValues("default")}>Top 2</button>
-                <button className='articleButton prev' onClick={() => adjustArticleAccessValues("-")}>&lt;</button>
-              </>
-            )}
-            {!isMaxArticlesReached && (
-                <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
-            )}
             <h2>{articleInfo[articleAccessValue1].title}</h2>
             <p>{articleInfo[articleAccessValue1].summary}</p>
             <button className='readArticleButton'>
