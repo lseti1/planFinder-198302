@@ -163,10 +163,9 @@ button:hover {
 
 
 .searchBar {
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.2); */
   text-align: center;
   color: white;
   gap: 1%;
@@ -182,7 +181,6 @@ button:hover {
 
 .searchArea {
   height: 100%;
-  width: 68%;
   border-radius: 5px;
 
   text-indent: 10px;
@@ -190,7 +188,6 @@ button:hover {
 
 .searchSelection {
   height: 100%;
-  width: 15%;
   border-radius: 5px;
   text-align: center;
 
@@ -207,7 +204,6 @@ button:hover {
 
 .searchButton {
   height: 100%;
-  width: 15%;
 }
 
 .searchLinks {
@@ -353,7 +349,7 @@ button:hover {
 @media screen and (orientation: portrait) and (min-width: 769px) and (max-width: 1299px) { 
   .Title, .InfoCard1, .InfoCard2, .searchBar, .searchResults {
     left: 5%;
-    background-color: grey;
+    /* background-color: grey; */
   }
 
   .IconsSignIn, .searchLinks {

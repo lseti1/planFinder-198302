@@ -101,17 +101,15 @@ function App() {
           <h2 className="InfoCard1">Search for things to do on your holiday!</h2>
           <p className="InfoCard2">Look for attractions, parks, museums and more... </p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="searchBar">
-            <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query} />
-            <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-              <option value="site">Tourist Attractions</option>
-              <option value="museum">Museums</option>
-              <option value="park">Parks</option>
-              <option value="beach">Beaches</option>
-            </select>
-            <button className="searchButton" type="submit" disabled={loading} onClick={() => setSearchQuery(`List of ${query} in ${searchType}`)}> {loading ? 'Searching...' : 'Search'} </button>
-          </div>
+        <form onSubmit={handleSubmit} className="searchBar">
+          <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query} />
+          <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+            <option value="site">Attractions</option>
+            <option value="museum">Museums</option>
+            <option value="park">Parks</option>
+            <option value="beach">Beaches</option>
+          </select>
+          <button className="searchButton" type="submit" disabled={loading} onClick={() => setSearchQuery(`List of ${query} in ${searchType}`)}> {loading ? 'Searching...' : 'Search'} </button>
         </form>
         {articleInfo.length > 1 && (
           <div className="searchLinks">
