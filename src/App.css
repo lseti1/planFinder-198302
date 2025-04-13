@@ -136,7 +136,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0);
   font-size: 3.5vh;
   height: 5%;
-  width: 70%;
+  width: 75%;
 
   transition: 0.4s;
   position: absolute;
@@ -351,6 +351,30 @@ button:hover {
 
 /* Larger Tablets/Small Laptops */
 @media screen and (orientation: portrait) and (min-width: 769px) and (max-width: 1299px) { 
+  .Title, .InfoCard1, .InfoCard2, .searchBar, .searchResults {
+    left: 5%;
+    background-color: grey;
+  }
+
+  .IconsSignIn, .searchLinks {
+    right: 5%;
+  }
+
+  .IconsSignIn {
+    width: 30%;
+  }
+
+  .searchBar {
+    width: 90%;
+  }
+
+  .searchLinks {
+    width: 29%;
+  }
+
+  .searchResults {
+    width: 60%;
+  }
 }
 
 /* Phones in Landscape */
