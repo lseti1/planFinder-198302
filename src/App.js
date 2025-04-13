@@ -11,10 +11,10 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchType, setSearchType] = useState('museums');
+  const [articleInfo, setArticleInfo] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  const [summary, setSummary] = useState('');
-  const [summary2, setSummary2] = useState('');
-  const [city, setCity] = useState('');
   const [modalType, setModalType] = useState(null);
   const [articleAccessValues, setArticleAccessValues] = useState([0, 1]);
   const [articleAccessValue1, articleAccessValue2] = articleAccessValues;
@@ -39,10 +39,10 @@ function App() {
   useEffect(() => {
     setArticleAccessValues([0, 1]);
     setIsMaxArticlesReached(false);
-  }, [city]);
+  }, [searchQuery]);
 
   useEffect(() => {
-    setIsMaxArticlesReached(articleAccessValue1 + 2 > results.length || articleAccessValue2 + 2 > results.length);
+    setIsMaxArticlesReached(articleAccessValue1 + 2 > articleInfo.length || articleAccessValue2 + 2 > articleInfo.length);
   }, [articleAccessValue1, articleAccessValue2]);
 
   const fetchData = async () => {
@@ -54,53 +54,25 @@ function App() {
     setError(null);
 
     try {
-      // To ensure that the search title is understandable and works with the on screen selector
-      let searchQuery = "List of ";
-      setCity(query);
-      if (searchType === 'Attractions') {
-        searchQuery += 'attractions ';
-      } else if (searchType === 'museums') {
-        searchQuery += 'museum ';
-      } else if (searchType === 'parks') {
-        searchQuery += 'parks ';
-      } else if (searchType === 'monuments') {
-        searchQuery += 'monuments ';
-      } else if (searchType === 'beaches') {
-        searchQuery += 'beaches ';
-      }
-      searchQuery += "in " + query;
-      console.log("Full Search: ", searchQuery);
-
-      // To get the list of articles and set up displays
       const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${encodeURIComponent(searchQuery)}&format=json&origin=*`);
       const data = await response.json();
 
-      // To Make Search Articles More Precise
       const searchResults = data.query.search;
-      const filteredResults = searchResults.filter(result =>
-        result.title.toLowerCase().includes(city.toLowerCase())
-      );
-      console.log(filteredResults.length);
-      setResults(filteredResults);
-
-      // To Get and display Content from the First Article Found
-      if (searchResults.length > 1) {
-        const firstPageTitle = searchResults[articleAccessValue1].title;
-        const secondPageTitle = searchResults[articleAccessValue2].title;
-        console.log("Title = ", firstPageTitle);
-        try {
-          const contentResponse = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(firstPageTitle)}`);
+      console.log(searchType)
+      const tempArray = [];
+      for (const result of searchResults) {
+        if (result.title.toLowerCase().includes(query.toLowerCase())) { // To Make Search Articles More Precise
+          const contentResponse = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(result.title)}`);
           const contentData = await contentResponse.json();
-          setSummary(contentData.extract);
-          const contentResponse2 = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(secondPageTitle)}`);
-          const contentData2 = await contentResponse2.json();
-          setSummary2(contentData2.extract);
-        } catch (error) {
-          console.error("Error fetching Wikipedia Content:", error);
-          setSummary("Failed fetching Wikipedia Content.");
-          setSummary2("Failed fetching Wikipedia Content.");
+  
+          tempArray.push({
+            title: result.title,
+            summary: contentData.extract,
+            pageID: result.pageid
+          });
         }
       }
+      setArticleInfo(tempArray);
     } catch (error) {
       setError("Failed fetching Wikipedia Content.");
       console.error("Error fetching Wikipedia Content:", error);
@@ -109,8 +81,12 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    console.log("Full List of Articles: ", articleInfo);
+  }, [searchResults])
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // to stop page from reloading
+    e.preventDefault();
     fetchData();
   };
 
@@ -129,41 +105,41 @@ function App() {
           <div className="searchBar">
             <input className="searchArea" type="search" placeholder="Enter your city..." onChange={(e) => setQuery(e.target.value)} value={query} />
             <select className="searchSelection" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-              <option value="Attractions">Tourist Attractions</option>
-              <option value="museums">Museums</option>
-              <option value="parks">Parks & Gardens</option>
-              <option value="monuments">Monuments</option>
-              <option value="beaches">Beaches</option>
+              <option value="site">Tourist Attractions</option>
+              <option value="museum">Museums</option>
+              <option value="park">Parks</option>
+              <option value="beach">Beaches</option>
             </select>
-            <button className="searchButton" type="submit" disabled={loading}> {loading ? 'Searching...' : 'Search'} </button>
+            <button className="searchButton" type="submit" disabled={loading} onClick={() => setSearchQuery(`List of ${query} in ${searchType}`)}> {loading ? 'Searching...' : 'Search'} </button>
           </div>
-        {summary && (
+        </form>
+        {articleInfo.length > 1 && (
           <div className="searchLinks">
             <h2>Articles:</h2>
             <h3>Top 2 Articles:</h3>
             <a 
-              className={articleAccessValue1 == 0 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${results[0].pageid}`} 
-              target="_blank" rel="noopener noreferrer">{results[0].title}
+              className={articleAccessValue1 == 0 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${articleInfo[0].pageID}`} 
+              target="_blank" rel="noopener noreferrer">{articleInfo[0].title}
             </a>
             <a 
-              className={articleAccessValue2 == 1 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${results[1].pageid}`} 
-              target="_blank" rel="noopener noreferrer">{results[1].title}
+              className={articleAccessValue2 == 1 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${articleInfo[1].pageID}`} 
+              target="_blank" rel="noopener noreferrer">{articleInfo[1].title}
             </a>
             <div><br   /></div>
             <h3>Other Articles:</h3>
-            {results.length > 0 ? (
-              <ul> {results.slice(2).map((result, index) => (
-                <li key={result.pageid}>
+            {articleInfo.length > 0 ? (
+              <ul> {articleInfo.slice(2).map((article, index) => (
+                <li key={index}>
                   <a 
                     className={index + 2 == articleAccessValue1 || index + 2 == articleAccessValue2 ? "linkHighlight" : ""} 
-                    href={`https://en.wikipedia.org/?curid=${result.pageid}`} target="_blank" rel="noopener noreferrer">
-                    {result.title}
+                    href={`https://en.wikipedia.org/?curid=${article.pageID}`} target="_blank" rel="noopener noreferrer">
+                    {article.title}
                   </a>
                 </li>))}
               </ul>) : (!loading && <p>No other  results found.</p>)}
           </div>
         )}
-        {summary ? (     
+        {articleInfo.length > 1 ? (     
           <div className="searchResults">
             {!isTopArticlesShown && (
               <>
@@ -174,16 +150,16 @@ function App() {
             {!isMaxArticlesReached && (
                 <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
             )}
-            <h2>{results[articleAccessValue1].title}</h2>
-            <p>{summary}</p>
+            <h2>{articleInfo[articleAccessValue1].title}</h2>
+            <p>{articleInfo[articleAccessValue1].summary}</p>
             <button className='readArticleButton'>
-              <a href={`https://en.wikipedia.org/?curid=${results[articleAccessValue1].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+              <a href={`https://en.wikipedia.org/?curid=${articleInfo[articleAccessValue1].pageID}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
             </button>
 
-            <h2>{results[articleAccessValue2].title}</h2>
-            <p>{summary2}</p>
+            <h2>{articleInfo[articleAccessValue2].title}</h2>
+            <p>{articleInfo[articleAccessValue2].summary}</p>
             <button className='readArticleButton'>
-              <a href={`https://en.wikipedia.org/?curid=${results[articleAccessValue2].pageid}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+              <a href={`https://en.wikipedia.org/?curid=${articleInfo[articleAccessValue2].pageID}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
             </button>
           </div>
         ) : (
@@ -191,7 +167,7 @@ function App() {
             <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>
           </div>
         )}
-        </form>
+        {/* Form Submit formely here */}
         {modalType && (
             <ModalWrapper onClose={closeModal}>
               <DynamicModalContent type={modalType}/>
@@ -205,6 +181,3 @@ function App() {
 }
 
 export default App;
-
-{/* <form onSubmit={handleSubmit}>
-</form> */}
