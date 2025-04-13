@@ -167,7 +167,6 @@ function App() {
             <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>
           </div>
         )}
-        {/* Form Submit formely here */}
         {modalType && (
             <ModalWrapper onClose={closeModal}>
               <DynamicModalContent type={modalType}/>
