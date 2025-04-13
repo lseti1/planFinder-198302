@@ -364,7 +364,6 @@ button:hover {
 @media screen and (orientation: landscape) and (min-width: 769px) and (max-width: 1299px) and (min-height: 513px) {
   .Title, .InfoCard1, .InfoCard2, .searchBar, .searchResults {
     left: 10%;
-    background-color: grey;
   }
 
   .IconsSignIn, .searchLinks {
