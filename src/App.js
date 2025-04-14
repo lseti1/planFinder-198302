@@ -94,8 +94,8 @@ function App() {
       <div className="App">
         <div className="Title"><h1>Plan Finder</h1></div>
         <div className="IconsSignIn">
-          <button className="signIn" onClick={() => setModalType('signIn')}><FontAwesomeIcon icon={faUser} /> Sign In</button>
-          <button className="register" onClick={() => setModalType('signUp')}><FontAwesomeIcon icon={faUserPlus} /> Sign Up</button>
+          <button className="signIn" onClick={() => setModalType('signIn')}>Sign In</button>
+          <button className="register" onClick={() => setModalType('signUp')}>Sign Up</button>
         </div>
         <div >
           <h2 className="InfoCard1">Search for things to do on your holiday!</h2>

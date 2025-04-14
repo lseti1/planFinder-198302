@@ -54,28 +54,17 @@ button:hover {
   background-color: rgb(203, 206, 255);
 }
 
-.signIn {
-  height: 50%;
-  width: 50%;
-}
-
-.register {
-  height: 50%;
-  width: 50%;
-}
-
-
 .IconsSignIn {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   grid-template-columns: 1fr 1fr;
-  /* background-color: rgba(255, 255, 255, 0.342); */
+  background-color: rgba(255, 255, 255, 0.342);
   color: white;
   gap: 10px;
 
-  width: 12%;
+  width: 10%;
   height: 8%;
   
   transition: 0.4s;
@@ -83,6 +72,12 @@ button:hover {
   right: 25%;
   top: 5%;
 }
+
+.signIn, .register {
+  height: 100%;
+  width: 100%;
+}
+
 
 .modalTextInputs {
   display: flex;
@@ -136,7 +131,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0);
   font-size: 3.5vh;
   height: 5%;
-  width: 75%;
+  width: 85%;
 
   transition: 0.4s;
   position: absolute;
@@ -152,7 +147,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0);
   font-size: 1.5vh;
   height: 3%;
-  width: 70%;
+  width: 80%;
   font-weight: bold;
 
   transition: 0.4s;
@@ -338,10 +333,44 @@ button:hover {
 
 /* Small-Medium Phones */
 @media screen and (orientation: portrait) and (max-width: 768px) {
-  .unsupportedMessage {
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    z-index: 9999;
+  .Title, .InfoCard1, .InfoCard2, .searchBar, .searchResults {
+    left: 5%;
+  }
+
+  .InfoCard1 {
+    font-size: 2.2vh
+  }
+
+  .IconsSignIn {
+    right: 5%;
+    width: 30%;
+    height: 5%;
+    flex-direction: row;
+    top: 5%;
+  }
+
+  .searchLinks {
+    text-align: center;
+    width: 80%;
+    height: 120px;
+    
+    position: absolute;
+    right: 10%;
+    top: 75%;
+  }
+
+  .readArticleButton {
+    text-align: center;
+  }
+
+  .searchBar {
+    width: 90%;
+  }
+
+  .searchResults {
+    width: 90%; 
+    height: 40%;
+    text-align: center;
   }
 }
 
@@ -349,7 +378,6 @@ button:hover {
 @media screen and (orientation: portrait) and (min-width: 769px) and (max-width: 1299px) { 
   .Title, .InfoCard1, .InfoCard2, .searchBar, .searchResults {
     left: 5%;
-    /* background-color: grey; */
   }
 
   .IconsSignIn, .searchLinks {
@@ -357,7 +385,7 @@ button:hover {
   }
 
   .IconsSignIn {
-    width: 30%;
+    width: 15%;
   }
 
   .searchBar {
@@ -390,10 +418,6 @@ button:hover {
     right: 10%;
   }
 
-  .IconsSignIn {
-    width: 20%;
-  }
-
   .searchBar {
     width: 80%;
   }
@@ -421,7 +445,7 @@ button:hover {
     width: 60%;
   }
 
-  .searchResults{
+  .searchResults {
     width: 40%;
   }
 
