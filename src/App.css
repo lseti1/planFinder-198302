@@ -60,11 +60,11 @@ button:hover {
   justify-content: center;
   align-items: center;
   grid-template-columns: 1fr 1fr;
-  background-color: rgba(255, 255, 255, 0.342);
+  /* background-color: rgba(255, 255, 255, 0.342); */
   color: white;
   gap: 10px;
 
-  width: 10%;
+  width: 8%;
   height: 8%;
   
   transition: 0.4s;
@@ -156,6 +156,9 @@ button:hover {
   top: 17%;
 }
 
+.searchBar, .saerchArea, .searchSelection, .signIn, .register, .readArticleButton, .articleButton {
+  font-size: 1.5vh;
+}
 
 .searchBar {
   display: grid;
@@ -177,7 +180,6 @@ button:hover {
 .searchArea {
   height: 100%;
   border-radius: 5px;
-
   text-indent: 10px;
 }
 
@@ -185,7 +187,6 @@ button:hover {
   height: 100%;
   border-radius: 5px;
   text-align: center;
-
   background-color: rgb(255, 255, 255);
 
   border: none;
@@ -269,7 +270,7 @@ button:hover {
   padding: 5px;
   color: white;
   position: absolute;
-  top: 18px;
+  top: 15px;
 }
 
 .articleButton:hover {
@@ -406,6 +407,64 @@ button:hover {
   .linkedButton:hover, .articleButton:hover, .modalSubmitButton:hover, .readArticleButton:hover {
     background-color: inherit;
   }
+
+  .Title, .InfoCard1, .InfoCard2, .searchBar, .searchResults {
+    left: 15%;
+  }
+
+  .searchBar {
+    height: 6%;
+  }
+
+  .searchResults, .readArticleButton {
+    font-size: 2vh;
+  }
+
+  .searchArea, .searchButton {
+    font-size: 1.7vh;
+  }
+
+  .IconsSignIn, .searchLinks {
+    right: 15%;
+  }
+
+  .IconsSignIn {
+    width: 15%;
+    height: 5%;
+    flex-direction: row;
+  }
+
+  option {
+    font-size: 3vh;
+  }
+
+  .searchBar {
+    width: 70%;
+  }
+
+  .searchLinks {
+    width: 20%;
+    height: 50%;
+    font-size: 2vh;
+  }
+
+  .searchResults {
+    width: 50%;
+  }
+
+  .top2 {
+    right: 60px;
+  }
+
+  .prev {
+    right: 40px;
+  }
+  
+  .next {
+    right: 20px;
+  }
+  
+  
 }
 
 /* Smaller Laptop Screens */
