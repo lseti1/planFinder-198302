@@ -171,7 +171,7 @@ function App() {
             </ModalWrapper>
         )}
       <div className='projectDisclaimer'>
-        <p>Powered By Wikipedia API <br />(This website is best viewed in Full Screen)</p>
+        <p>Powered By Wikipedia API</p>
       </div>
       </div>
   );
