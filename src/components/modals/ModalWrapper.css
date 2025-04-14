@@ -37,6 +37,10 @@
 
 /* Small-Medium Phones */
 @media screen and (orientation: portrait) and (max-width: 768px) {
+  .modalBox {
+    width: 80%;
+    left: 10%;
+  }
 }
 
   /* Larger Tablets/Small Laptops */
@@ -49,7 +53,22 @@
 
 /* Phones in Landscape */
 @media screen and (orientation: landscape) and (max-width: 1299px) and (max-height: 512px) and (hover: none) {
-  
+  .modalBox {
+    width: 40%;
+    left: 30%;
+    height: 60%;
+    bottom: 20%;
+
+    font-size: 2vh;
+  }
+
+  .modalTextInputs, .linkedButton, .modalSubmitButton {
+    font-size: 2vh;
+  }
+
+  .modalExitButton {
+    padding: 5px 10px;
+  }
 }
 
 /* Smaller Laptop Screens */
