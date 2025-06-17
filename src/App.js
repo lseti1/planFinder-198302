@@ -64,6 +64,8 @@ function App() {
         if (result.title.toLowerCase().includes(query.toLowerCase())) { // To Make Search Articles More Precise
           const contentResponse = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(result.title)}`);
           const contentData = await contentResponse.json();
+
+          console.log("Content Response: ", contentResponse);
   
           tempArray.push({
             title: result.title,
@@ -115,7 +117,7 @@ function App() {
           <div className="searchLinks">
             {!isTopArticlesShown && (
               <>
-                <button className='articleButton top2' onClick={() => adjustArticleAccessValues("default")}>Top 2</button>
+                <button className='articleButton top2' onClick={() => adjustArticleAccessValues("default")}>Top</button>
                 <button className='articleButton prev' onClick={() => adjustArticleAccessValues("-")}>&lt;</button>
               </>
             )}
@@ -123,15 +125,19 @@ function App() {
                 <button className='articleButton next ' onClick={() => adjustArticleAccessValues("+")}>&gt;</button>
             )}
             <h2>Articles:</h2>
-            <h3>Top 2 Articles:</h3>
-            <a 
-              className={articleAccessValue1 == 0 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${articleInfo[0].pageID}`} 
-              target="_blank" rel="noopener noreferrer">{articleInfo[0].title}
-            </a>
-            <a 
-              className={articleAccessValue2 == 1 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${articleInfo[1].pageID}`} 
-              target="_blank" rel="noopener noreferrer">{articleInfo[1].title}
-            </a>
+            <h3>Top Articles:</h3>
+            {articleInfo[0] && (
+              <a 
+                className={articleAccessValue1 == 0 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${articleInfo[0].pageID}`} 
+                target="_blank" rel="noopener noreferrer">{articleInfo[0].title}
+              </a>
+            )}
+            {articleInfo[1] && (
+              <a 
+                className={articleAccessValue2 == 1 ? "linkHighlight" : ""} href={`https://en.wikipedia.org/?curid=${articleInfo[1].pageID}`} 
+                target="_blank" rel="noopener noreferrer">{articleInfo[1].title}
+              </a>
+            )}
             <div><br   /></div>
             <h3>Other Articles:</h3>
             {articleInfo.length > 0 ? (
@@ -146,7 +152,7 @@ function App() {
               </ul>) : (!loading && <p>No other  results found.</p>)}
           </div>
         )}
-        {articleInfo.length > 1 ? (     
+        {articleInfo.length > 0 ? (     
           <div className="searchResults">
             {articleInfo[articleAccessValue1] ? (
               <>
@@ -157,9 +163,7 @@ function App() {
                 </button>
               </>
             ) : (
-              <>
-                <p></p>
-              </>
+              <><p></p></>
             )}
             {articleInfo[articleAccessValue2] ? (
               <>
@@ -170,9 +174,7 @@ function App() {
                 </button>
               </>
             ) : (
-              <>
-                <p></p>
-              </>
+              <><p></p></>
             )}
           </div>
         ) : (
