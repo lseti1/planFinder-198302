@@ -148,17 +148,32 @@ function App() {
         )}
         {articleInfo.length > 1 ? (     
           <div className="searchResults">
-            <h2>{articleInfo[articleAccessValue1].title}</h2>
-            <p>{articleInfo[articleAccessValue1].summary}</p>
-            <button className='readArticleButton'>
-              <a href={`https://en.wikipedia.org/?curid=${articleInfo[articleAccessValue1].pageID}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
-            </button>
-
-            <h2>{articleInfo[articleAccessValue2].title}</h2>
-            <p>{articleInfo[articleAccessValue2].summary}</p>
-            <button className='readArticleButton'>
-              <a href={`https://en.wikipedia.org/?curid=${articleInfo[articleAccessValue2].pageID}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
-            </button>
+            {articleInfo[articleAccessValue1] ? (
+              <>
+                <h2>{articleInfo[articleAccessValue1].title}</h2>
+                <p>{articleInfo[articleAccessValue1].summary}</p>
+                <button className='readArticleButton'>
+                  <a href={`https://en.wikipedia.org/?curid=${articleInfo[articleAccessValue1].pageID}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+                </button>
+              </>
+            ) : (
+              <>
+                <p></p>
+              </>
+            )}
+            {articleInfo[articleAccessValue2] ? (
+              <>
+                <h2>{articleInfo[articleAccessValue2].title}</h2>
+                <p>{articleInfo[articleAccessValue2].summary}</p>
+                <button className='readArticleButton'>
+                  <a href={`https://en.wikipedia.org/?curid=${articleInfo[articleAccessValue2].pageID}`} target="_blank" rel="noopener noreferrer">Read More About This Article</a>
+                </button>
+              </>
+            ) : (
+              <>
+                <p></p>
+              </>
+            )}
           </div>
         ) : (
           <div className="instructions">
