@@ -301,12 +301,15 @@ button:hover {
 }
 
 .instructions {
-  /* background-color: rgba(0, 0, 0, 0.295); */
+  background-color: rgba(212, 221, 82, 0.295);
+  border: 1px solid rgba(128, 128, 128, 0.473);
+  border-radius: 5px;
   font-size: 1.7vh;
-  width: 40%;
+  width: 20%;
+  padding: 1%;
 
   position: absolute;
-  left: 30%;
+  left: 40%;
   top: 33%;
 }
 
