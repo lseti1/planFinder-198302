@@ -10,7 +10,7 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchType, setSearchType] = useState('museums');
+  const [searchType, setSearchType] = useState('site');
   const [articleInfo, setArticleInfo] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
