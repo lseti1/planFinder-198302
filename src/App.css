@@ -310,6 +310,21 @@ button:hover {
   top: 33%;
 }
 
+.errorMessage {
+  background-color: rgba(221, 82, 82, 0.295);
+  border: 1px solid rgba(128, 128, 128, 0.473);
+  border-radius: 5px;
+  font-size: 1.7vh;
+  width: 20%;
+  padding: 1%;
+
+  overflow-x: hidden;
+
+  position: absolute;
+  left: 40%;
+  top: 33%;
+}
+
 .projectDisclaimer {
   display: flex;
   justify-content: center;

@@ -58,7 +58,9 @@ function App() {
       const data = await response.json();
 
       const searchResults = data.query.search;
-      console.log(searchType)
+      console.log("Search Type: ", searchType);
+      console.log("Search Type: ", searchResults);
+      console.log("Search Query:", searchQuery);
       const tempArray = [];
       for (const result of searchResults) {
         if (result.title.toLowerCase().includes(query.toLowerCase())) { // To Make Search Articles More Precise
@@ -111,7 +113,7 @@ function App() {
             <option value="park">Parks</option>
             <option value="beach">Beaches</option>
           </select>
-          <button className="searchButton" type="submit" disabled={loading} onClick={() => setSearchQuery(`List of ${query} in ${searchType}`)}> {loading ? 'Searching...' : 'Search'} </button>
+          <button className="searchButton" type="submit" disabled={loading} onClick={() => setSearchQuery(`List of ${searchType} in ${query}`)}> {loading ? 'Loading...' : 'Search'} </button>
         </form>
         {articleInfo.length > 1 && (
           <div className="searchLinks">
@@ -152,7 +154,7 @@ function App() {
               </ul>) : (!loading && <p>No other  results found.</p>)}
           </div>
         )}
-        {articleInfo.length > 0 ? (     
+        {articleInfo.length > 0 && (     
           <div className="searchResults">
             {articleInfo[articleAccessValue1] ? (
               <>
@@ -177,9 +179,10 @@ function App() {
               <><p></p></>
             )}
           </div>
-        ) : (
-          <div className="instructions">
-            <h3>To Get Started: Enter the city you're at above, select what type of destination you're looking for and then hit search!</h3>
+        )}
+        { articleInfo < 1 && searchQuery != "" && !loading && (
+          <div className="errorMessage">
+            <h3>No results found for "{searchQuery.trim().split(" ").at(-1)}". Please enter another city.</h3>
           </div>
         )}
         {modalType && (
