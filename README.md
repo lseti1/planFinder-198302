@@ -1,24 +1,23 @@
-React Searcher Version 1.00 (07/02/25)
+React Searcher Version 1.00 (10/07/25)
 # Plan Finder
 Plan Finder is a Search Engine that allows you to look for things to do in the city that you're holidaying in.
 
 ## Installation
-This application does not require installation. Simply ensure that you have an internet connection and access to a Personal Computer. 
+This application does not require installation. Simply ensure that you have an internet connection and access it through the link in the About section of this repository.
 
 ## Usage
-- Enter the city in which you're holidaying in currently/about to
-- Change the drop-down menu to what type of thing you're looking to do and search
-- The website will display key information about your search but if you'd like more info, you can press the link below to see more
-- Other links are also included on the side menu for more information
+- Enter the city in which you want holiday information for
+- Change the drop-down menu to the cateogry you're looking for and search
+- Key information will be displayed instantly but links will be provided for more info
+- Other articles can be displayed on screen or clicked to view in their entirety
 
-Note: Plan Finder is best viewed in Full Screen Mode on a Personal Computer (Not all features may work properly).
+Note: Plan Finder is best viewed in Full Screen Mode on a Personal Computer (Sign-In/Sign-Up capabilities are inactive).
 
 ## Features
 - Adjustable search capabilities
-- Simple but effective visual presentation of information
-- Text generation powered by Wikipedia API
+- Simple but effective visual presentation of multiple information points on a single view
+- Text generation/parsing powered by Wikipedia API
 - Links to highlighted article and related articles
-- An effective way to gain access to multiple pages on a single website
 
 ## Author
 Lucas Setiady   
